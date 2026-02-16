@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe Pro</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex items-center justify-center p-4">
+
+    <div class="w-full max-w-[440px] flex flex-col gap-6">
+        
+        <!-- Scoreboard & Header -->
+        <div class="glass rounded-[32px] p-6 shadow-xl flex flex-col gap-6">
+            <div class="flex justify-between items-center">
+                <div id="score-x" class="flex flex-col items-center gap-1 transition-all duration-300">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Player X</span>
+                    <span id="val-x" class="text-3xl font-black text-indigo-600">0</span>
+                </div>
+                <div class="h-10 w-[1px] bg-slate-200"></div>
+                <div id="score-draw" class="flex flex-col items-center gap-1">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Draws</span>
+                    <span id="val-draw" class="text-3xl font-black text-slate-400">0</span>
+                </div>
+                <div class="h-10 w-[1px] bg-slate-200"></div>
+                <div id="score-o" class="flex flex-col items-center gap-1 transition-all duration-300">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Player O</span>
+                    <span id="val-o" class="text-3xl font-black text-rose-500">0</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-100/80 p-1.5 rounded-2xl flex relative">
+                <button id="mode-friend" class="toggle-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all z-10 active">vs Friend</button>
+                <button id="mode-ai" class="toggle-btn flex-1 py-2.5 rounded-xl text-sm font-bold transition-all z-10 text-slate-500">vs Computer</button>
+            </div>
+        </div>
+
+        <!-- AI Settings Panel -->
+        <div id="ai-settings" class="hidden glass rounded-[24px] p-4 shadow-lg">
+            <div class="flex items-center justify-between px-2 mb-3">
+                <span class="text-xs font-extrabold text-slate-400 uppercase tracking-tighter">AI Logic Engine</span>
+                <span id="diff-label" class="text-[10px] bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full font-bold uppercase">Medium</span>
+            </div>
+            <div class="flex gap-2">
+                <button data-level="easy" class="diff-chip flex-1 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase border-2 border-slate-100 text-slate-400 transition-all hover:bg-slate-50">Easy</button>
+                <button data-level="medium" class="diff-chip flex-1 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase border-2 border-indigo-500 bg-indigo-50 text-indigo-600 transition-all">Medium</button>
+                <button data-level="hard" class="diff-chip flex-1 py-2 rounded-lg text-[10px] font-black tracking-widest uppercase border-2 border-slate-100 text-slate-400 transition-all hover:bg-slate-50">Expert</button>
+            </div>
+        </div>
+
+        <!-- The Arena -->
+        <div class="glass rounded-[40px] p-4 shadow-2xl relative">
+            <div id="board" class="board-grid">
+                <div data-index="0" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="1" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="2" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="3" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="4" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="5" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="6" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="7" class="cell rounded-3xl cursor-pointer"></div>
+                <div data-index="8" class="cell rounded-3xl cursor-pointer"></div>
+            </div>
+            <div class="text-center mt-6 pb-2">
+                <p id="game-status" class="text-sm font-bold text-slate-400 uppercase tracking-[0.2em]">Match in Progress</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-3">
+            <button id="next-round-btn" class="flex-[2] py-5 bg-white border border-slate-200 text-slate-800 rounded-[24px] font-bold text-xs tracking-widest uppercase hover:bg-slate-50 active:scale-[0.98] transition-all shadow-md">
+                Next Round
+            </button>
+            <button id="reset-scores-btn" class="flex-1 py-5 bg-slate-900 text-white rounded-[24px] font-bold text-[10px] tracking-widest uppercase hover:bg-slate-800 active:scale-[0.98] transition-all shadow-xl shadow-slate-200">
+                Full Reset
+            </button>
+        </div>
+
+        <!-- Result Overlay -->
+        <div id="modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden items-center justify-center p-6 z-50">
+            <div class="bg-white rounded-[40px] p-10 shadow-2xl text-center max-w-sm w-full transform transition-all scale-100">
+                <div id="modal-icon" class="w-20 h-20 bg-indigo-50 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6">🏆</div>
+                <h2 id="modal-title" class="text-3xl font-black text-slate-800 mb-2">Victory!</h2>
+                <p id="modal-desc" class="text-slate-500 font-medium mb-8">Match Completed.</p>
+                <button id="modal-close" class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-black tracking-widest uppercase hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100">
+                    Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+</html>

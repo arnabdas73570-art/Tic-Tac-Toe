@@ -1,0 +1,108 @@
+@import url('[https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap](https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap)');
+
+:root {
+    --primary: #6366f1;
+    --secondary: #f43f5e;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at top left, #f8fafc, #e2e8f0);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.cell {
+    position: relative;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    aspect-ratio: 1 / 1; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell:hover:not(.occupied) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.1);
+    background: #fdfdff;
+}
+
+.cell:active:not(.occupied) {
+    transform: translateY(0);
+}
+
+.cell.occupied {
+    cursor: default;
+}
+
+.marker-svg {
+    width: 65%;
+    height: 65%;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: draw 0.4s ease-out forwards;
+    display: block;
+}
+
+@keyframes draw {
+    to { stroke-dashoffset: 0; }
+}
+
+.turn-active {
+    position: relative;
+}
+
+.turn-active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 4px;
+    border-radius: 2px;
+    background: currentColor;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { width: 0; opacity: 0; }
+    to { width: 24px; opacity: 1; }
+}
+
+.win-pulse {
+    animation: winPulse 1.5s infinite;
+    z-index: 10;
+}
+
+@keyframes winPulse {
+    0%, 100% { background: white; transform: scale(1); }
+    50% { background: #f0fdf4; transform: scale(0.96); }
+}
+
+.toggle-btn.active {
+    background: white;
+    color: var(--primary);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
