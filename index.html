@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe Pro</title>
-    <!-- Tailwind CSS CDN -->
+   
     <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <!-- Custom Styles -->
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="flex items-center justify-center p-4">
 
     <div class="w-full max-w-[440px] flex flex-col gap-6">
         
-        <!-- Scoreboard & Header -->
         <div class="glass rounded-[32px] p-6 shadow-xl flex flex-col gap-6">
             <div class="flex justify-between items-center">
                 <div id="score-x" class="flex flex-col items-center gap-1 transition-all duration-300">
@@ -38,7 +37,7 @@
             </div>
         </div>
 
-        <!-- AI Settings Panel -->
+
         <div id="ai-settings" class="hidden glass rounded-[24px] p-4 shadow-lg">
             <div class="flex items-center justify-between px-2 mb-3">
                 <span class="text-xs font-extrabold text-slate-400 uppercase tracking-tighter">AI Logic Engine</span>
@@ -51,7 +50,7 @@
             </div>
         </div>
 
-        <!-- The Arena -->
+
         <div class="glass rounded-[40px] p-4 shadow-2xl relative">
             <div id="board" class="board-grid">
                 <div data-index="0" class="cell rounded-3xl cursor-pointer"></div>
@@ -69,7 +68,7 @@
             </div>
         </div>
 
-        <!-- Action Buttons -->
+
         <div class="flex gap-3">
             <button id="next-round-btn" class="flex-[2] py-5 bg-white border border-slate-200 text-slate-800 rounded-[24px] font-bold text-xs tracking-widest uppercase hover:bg-slate-50 active:scale-[0.98] transition-all shadow-md">
                 Next Round
@@ -79,7 +78,7 @@
             </button>
         </div>
 
-        <!-- Result Overlay -->
+
         <div id="modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden items-center justify-center p-6 z-50">
             <div class="bg-white rounded-[40px] p-10 shadow-2xl text-center max-w-sm w-full transform transition-all scale-100">
                 <div id="modal-icon" class="w-20 h-20 bg-indigo-50 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6">🏆</div>
@@ -92,7 +91,8 @@
         </div>
     </div>
 
-    <!-- Script File -->
+
     <script src="script.js"></script>
 </body>
+
 </html>
